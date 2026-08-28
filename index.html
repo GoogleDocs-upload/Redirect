@@ -1,9 +1,140 @@
-<!DOCTYPE html>
-<html>
+!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>My GitHub Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Docs - Error</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #202124;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 480px;
+            padding: 20px;
+        }
+
+        .docs-logo {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 28px;
+            margin: 0 0 16px 0;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 20px;
+            color: #5f6368;
+            margin: 0 0 28px 0;
+        }
+
+        .btn-reload {
+            position: relative;
+            background-color: #1a73e8;
+            color: #ffffff;
+            border: none;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            transition: background-color 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 90px;
+            height: 36px;
+            box-sizing: border-box;
+        }
+
+        .btn-reload:hover {
+            background-color: #1557b0;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15);
+        }
+
+        /* Loading state styles */
+        .btn-reload.loading {
+            background-color: #1557b0;
+            color: transparent; /* Hides the text "Reload" while loading */
+            cursor: not-allowed;
+        }
+
+        /* The CSS Spinner */
+        .spinner {
+            display: none;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .btn-reload.loading .spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, world! Welcome to my website.</h1>
+
+    <div class="error-container">
+        <svg class="docs-logo" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
+            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="#2684FC"/>
+            <path d="M14 2V8H20L14 2Z" fill="#A1C2FA"/>
+            <path d="M16 12H8V14H16V12Z" fill="white"/>
+            <path d="M16 16H8V18H16V16Z" fill="white"/>
+            <path d="M12 8H8V10H12V8Z" fill="white"/>
+        </svg>
+
+        <h1>We're sorry. You can't access this item because it is in violation of our Terms of Service.</h1>
+        
+        <p>If you feel this is a mistake, you can request a review. Find more information about this topic in the Google Drive Help Center.</p>
+        
+        <!-- The button now calls the JavaScript function -->
+        <button class="btn-reload" id="reloadBtn" onclick="startLoading()">
+            <span class="btn-text">Reload</span>
+            <div class="spinner"></div>
+        </button>
+    </div>
+
+    <script>
+        function startLoading() {
+            const button = document.getElementById('reloadBtn');
+            
+            // Check if it's already loading to prevent double-clicks
+            if (button.classList.contains('loading')) return;
+
+            // Add the loading class to trigger CSS changes and show spinner
+            button.classList.add('loading');
+
+            // Simulate a 3-second network request, then refresh the page
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000); 
+        }
+    </script>
+
 </body>
 </html>
